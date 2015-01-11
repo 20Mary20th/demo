@@ -1,0 +1,43 @@
+<?php
+
+/*
+ * Implements hook_permission().
+ * hook is the name of your module on your .info file. In this case, It is your [demo] directory
+ */
+ 
+ function demo_permission() {
+	 return array(
+	 'administer demo module' => array (
+		'title' => t('Administer demo module'),
+		'description' => t('Perform administration tasks for the Demo module'),
+		),
+	 );
+}
+
+ /*
+  * Implements hook_node_view()
+  */
+
+
+
+ function demo_node_view($node, $view_mode, $langcode) {
+   $node->content['demo_field'] = array(
+   '#type' => 'markup',
+   '#markup' => '<p><strong>'.t('This is only a demo.').'</strong></p>',
+   '#weight' => -10,
+   );
+   
+   $node->content['demo_list'] = array(
+   '#items' => array('green', 'blue', 'red', 'yellow'),
+   '#theme' => 'item_list',
+   '#weight' => -9,
+   
+   );
+   
+   krumo($node);
+   /* krumo($node); >> this line will also draw out different object classes or variables,
+    * you found, in which case: demo_field, demo_list;
+    * printing texts, # signs means property, calling a property
+    */
+}
+
